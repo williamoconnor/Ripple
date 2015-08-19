@@ -1,0 +1,29 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'uninstall',
+1 verbose cli   'gulp-watch',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose node_modules/gulp-watch unbuild
+5 info preuninstall gulp-watch@4.3.5
+6 info uninstall gulp-watch@4.3.5
+7 verbose true,/HundredDollaBill/RippleMean/node_modules,/HundredDollaBill/RippleMean/node_modules unbuild gulp-watch@4.3.5
+8 info postuninstall gulp-watch@4.3.5
+9 error Error: EACCES, unlink '/HundredDollaBill/RippleMean/node_modules/gulp-watch/node_modules/gulp-util/node_modules/.bin/dateformat'
+9 error  { [Error: EACCES, unlink '/HundredDollaBill/RippleMean/node_modules/gulp-watch/node_modules/gulp-util/node_modules/.bin/dateformat']
+9 error   errno: 3,
+9 error   code: 'EACCES',
+9 error   path: '/HundredDollaBill/RippleMean/node_modules/gulp-watch/node_modules/gulp-util/node_modules/.bin/dateformat' }
+10 error Please try running this command again as root/Administrator.
+11 error System Darwin 14.4.0
+12 error command "node" "/usr/local/bin/npm" "uninstall" "gulp-watch" "--save"
+13 error cwd /HundredDollaBill/RippleMean
+14 error node -v v0.10.32
+15 error npm -v 1.4.28
+16 error path /HundredDollaBill/RippleMean/node_modules/gulp-watch/node_modules/gulp-util/node_modules/.bin/dateformat
+17 error code EACCES
+18 error errno 3
+19 error stack Error: EACCES, unlink '/HundredDollaBill/RippleMean/node_modules/gulp-watch/node_modules/gulp-util/node_modules/.bin/dateformat'
+20 verbose exit [ 3, true ]

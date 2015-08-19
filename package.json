@@ -1,0 +1,30 @@
+{
+  "name": "RippleMean",
+  "version": "1.0.0",
+  "description": "Location based music sharing and streaming",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/williamoconnor/Ripple.git"
+  },
+  "author": "William O'Connor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/williamoconnor/Ripple/issues"
+  },
+  "homepage": "https://github.com/williamoconnor/Ripple",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^1.0.0",
+    "gulp-watch": "^4.3.5"
+  }
+}
