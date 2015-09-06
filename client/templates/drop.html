@@ -1,0 +1,4 @@
+<div class="song-player">
+	<button class="drop-button" ng-click="dropSong(droptype)" ng-hide="{{isOriginalDropper(droptype)}}"></button>
+	<iframe class="iframeObj" id="{{songid}}" ng-src="{{getIframeSrc(songid)}}"></iframe>
+</div>

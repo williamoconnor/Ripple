@@ -1,0 +1,28 @@
+<div ng-controller="homeController as homeCtrl">
+	<div class="nav-bar">
+		<div id="header">
+			<button ng-click="showFeed()" class="nav-bar-logo-link"><img src='../images/logo.png' height="150" width="300"/></button>
+		</div>
+		<div class="nav-bar-account-container">
+			<button ng-click="setAccountOpen(true)" class="nav-bar-account-button"><img src='../images/OrangeRippleProfile.png'/ height="150" width="150"></button>
+			<p class="nav-bar-email">{{ homeCtrl.email }}</p>
+		</div>
+	</div>
+
+	<br>
+
+	<search-box ng-if="accountOpen == false"></search-box>			
+	<div class="content content-container">
+		<feed ng-if="searching == 0 && accountOpen == false" class='feed' ng-init="homeCtrl.init()"></feed>
+		<search-results ng-if="searching == 1" class='search-results'></search-results>
+		<account-view ng-if="accountOpen == true" class="account-view"></account-view>
+	</div>
+
+	<div id="footer" style="text-align:center;">
+		<hr></hr>
+		<a href="about.html" style="color:gray; text-decoration:none;">About Us</a> |
+		<!-- <a href="analytics.html" style="color:gray; text-decoration:none;">Ripple Analytics</a><br></br> -->
+		Created by Ripple, LLC - 2015
+		<br></br>
+	</div>
+</div>

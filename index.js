@@ -2,26 +2,35 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var cookieParser = require('cookie-parser');
 
 // routes
-var dropRouter = require('./routes/drops');
+var dropRouter = require('./server/routes/dropRoutes');
+var userRouter = require('./server/routes/userRoutes');
 
 // middleware
-var location = require('./middleware/location');
+var location = require('./server/middleware/location');
 
 // database
-var databaseUrl;
-var collections;
-//var db = require('mongojs').connect(databaseUrl, collections);
+mongoose.connect('mongodb://localhost/rippleTest');
 
 // app
-app.use(express.static('views'));
-app.use('/drops', location.getListenerLocation, dropRouter);
+app.use('/api/drops', dropRouter);
+app.use('/api/users', userRouter);
+
+// static files
+app.use(express.static('client'));
+app.use(express.static('bower_components'));
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + 'views/index.html');
+	res.sendFile(__dirname + '/client/views/index.html');
 });
 
-app.listen(3000);
+app.listen(3000, function (){
+	console.log('App running on port 3000');
+});
 
 module.exports = app;

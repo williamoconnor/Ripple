@@ -1,0 +1,77 @@
+Database Design:
+	User:
+		email
+		password
+		points
+		verified
+		latitude
+		longitude
+	Drop:
+		last_drop_id
+		last_dropper_id
+		user_id
+		stream_url
+		soundcloud_track_id
+		name
+		artwork_url
+		streamable
+		latitude1
+		latitude2
+		logitude1
+		longitude2
+
+
+API Methods:
+	User:
+		createUser
+			{
+				email: string,
+				password: string,
+				latitude: double,
+				longitude: double
+			}
+		changePassword
+			{
+				email: string,
+				password: string,
+				newPassword: string
+			}
+		verifyUser
+			{
+				userId: string
+			}
+		login - create session - getUserInfo -
+			{
+				email: string, 
+				password: string
+			}
+		givePointsById
+			{
+				userId: string,
+				points: int
+			}
+	Drop:
+		getDropsForLocation
+			{
+				latitude: double,
+				longitude: double
+			}
+		createDrop
+			{
+				userId: string,
+				streamUrl: string, 
+				soundcloudTrackId: string,
+				name: string,
+				artworkUrl: string,
+				streamable: bool,
+				latitude1: double,
+				latitude2: double,
+				logitude1: double,
+				longitude2: double,
+				lastDropId: string,
+				lastDropperId: string
+			}
+		reDrop // finds the drop with this id, then calls create drop with that info
+			{
+				dropId: string
+			}

@@ -1,0 +1,166 @@
+html {
+  min-height: 100%; }
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: -webkit-linear-gradient(160deg, #2d3442, #fff);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(160deg, #2d3442, #fff);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(160deg, #2d3442, #fff);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(160deg, #2d3442, #fff);
+  /* Standard syntax */ }
+
+.content {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+.content-container {
+  width: 85%;
+  margin: 10px auto;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .content-container .drop-container, .content-container .search-results-container {
+    background-color: #f63101;
+    display: flex;
+    justify-content: space-around;
+    padding: 14px 0;
+    border-radius: 4px;
+    width: 88%;
+    margin: 8px auto; }
+    .content-container .drop-container drop, .content-container .search-results-container drop {
+      width: 100%; }
+  .content-container .search-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .content-container .search-header #search-header-title {
+      color: #f63101;
+      font-family: "Poiret One";
+      font-size: 3em;
+      margin: 18px auto;
+      text-align: center; }
+    .content-container .search-header #return-to-feed-button {
+      margin: 14px auto;
+      border: 1px solid #f63101;
+      border-radius: 4px;
+      color: #f63101;
+      background-color: #e5e6e8;
+      font-family: "Poiret One";
+      font-size: 1.5em; }
+      .content-container .search-header #return-to-feed-button:hover {
+        cursor: pointer; }
+
+.song-player {
+  width: 96%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+  .song-player .drop-button {
+    margin: 0 10px 0 0;
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    background: transparent url("../images/drop-icon100.png") no-repeat top; }
+  .song-player .iframeObj {
+    width: 85%;
+    border: none;
+    border-radius: 5px;
+    margin: 0 auto; }
+
+.search-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .search-area .search-box {
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    justify-content: center; }
+    .search-area .search-box .search-item {
+      border: 1px solid #f63101;
+      border-radius: 4px;
+      font-family: 'Poiret One';
+      color: #f63101;
+      font-size: 1.6em;
+      align-self: center; }
+    .search-area .search-box .button {
+      background-color: #e5e6e8;
+      margin-left: 10px; }
+      .search-area .search-box .button:focus {
+        outline-color: #f63101; }
+    .search-area .search-box #search-query {
+      width: 60%;
+      padding: 6px;
+      background-color: #2d3442; }
+      .search-area .search-box #search-query:focus {
+        outline-color: #f63101; }
+  .search-area .search-instructions {
+    font-family: 'Poiret One';
+    color: #e5e6e8;
+    margin: 5px auto; }
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px; }
+  .nav-bar #header .nav-bar-logo-link {
+    background: none;
+    border: none; }
+    .nav-bar #header .nav-bar-logo-link:hover {
+      cursor: pointer; }
+  .nav-bar .nav-bar-account-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+    .nav-bar .nav-bar-account-container .nav-bar-account-button {
+      background: none;
+      border: none; }
+      .nav-bar .nav-bar-account-container .nav-bar-account-button:hover {
+        cursor: pointer; }
+      .nav-bar .nav-bar-account-container .nav-bar-account-button:focus {
+        outline: none; }
+    .nav-bar .nav-bar-account-container .nav-bar-email {
+      font-family: "Poiret One";
+      margin: 8px auto; }
+
+.account-view .account-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .account-view .account-view-container #logout-button {
+    border: 1px solid #f63101;
+    border-radius: 4px;
+    background-color: #e5e6e8;
+    font-family: "Poiret One";
+    color: #f63101;
+    margin: 10px auto;
+    font-size: 1.5em; }
+
+.no-drops-container {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #f63101;
+  border-radius: 4px;
+  background-color: #2d3442;
+  width: 70%;
+  margin: 10px auto; }
+  .no-drops-container .no-drops-message {
+    text-align: center;
+    width: 60%;
+    color: #f63101;
+    margin: 10px auto;
+    font-family: "Poiret One"; }

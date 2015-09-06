@@ -1,0 +1,10 @@
+<div class='search-header'>
+	<h1 id="search-header-title">Search Results</h1>
+	<button ng-click="setSearching(false)" id='return-to-feed-button'>Return to Feed</button>
+</div>
+<div ng-repeat='result in searchResults' class="drop-container">
+	<drop droptype="'drop'" songid="result.id"></drop>
+</div>
+<div class="no-drops-container" ng-hide="searchResults.length > 0">
+	<h1 class="no-drops-message">No results</h1>
+</div>

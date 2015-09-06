@@ -1,0 +1,9 @@
+<div ng-controller="accountController as accountCtrl" class="account-view-container">
+	<button id="logout-button" ng-click="accountCtrl.logout()">Logout</button>
+	<div ng-repeat='drop in accountCtrl.userDrops' class="drop-container">
+		<drop droptype="'redrop'" songid="drop.soundcloud_track_id"></drop>
+	</div>
+	<div class="no-drops-container" ng-hide="accountCtrl.userDrops.length > 0">
+		<h1 class="no-drops-message">{{accountCtrl.noDropsMessage}}</h1>
+	</div>
+</div>

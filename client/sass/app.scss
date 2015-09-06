@@ -1,0 +1,233 @@
+@import 'variables';
+
+html {
+	min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+	background: -webkit-linear-gradient(160deg, $slate-navy, $white); /* For Safari 5.1 to 6.0 */
+  	background: -o-linear-gradient(160deg, $slate-navy, $white); /* For Opera 11.1 to 12.0 */
+  	background: -moz-linear-gradient(160deg, $slate-navy, $white); /* For Firefox 3.6 to 15 */
+  	background: linear-gradient(160deg, $slate-navy, $white); /* Standard syntax */
+}
+
+.content {
+	margin: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.content-container {
+	width: 85%;
+	margin: 10px auto;
+	// background-color: $light-gray;
+	// border: 1px solid $dark-gray;
+	border-radius: 4px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	.drop-container, .search-results-container {
+		background-color: $primary-red;
+		display: flex;
+		justify-content: space-around;
+		padding: 14px 0;
+		border-radius: 4px;
+		width: 88%;
+		margin: 8px auto;
+
+		drop {
+			width: 100%;
+		}
+	}
+
+	.search-header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		#search-header-title {
+			color: $primary-red;
+			font-family: "Poiret One";
+			font-size: 3em;
+			margin: 18px auto;
+			text-align: center;
+		}
+
+		#return-to-feed-button {
+			margin: 14px auto;
+			border: 1px solid $primary-red;
+			border-radius: 4px;
+			color: $primary-red;
+			background-color: $light-gray;
+			font-family: "Poiret One";
+			font-size: 1.5em;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
+
+}
+
+.song-player {
+	width: 96%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	.drop-button {
+		margin: 0 10px 0 0;
+		height: 100px;
+		width: 100px;
+		border-radius: 100px;
+		background: transparent url("../images/drop-icon100.png") no-repeat top;
+
+		&:active {
+		}
+
+	}
+
+	.iframeObj {
+		width: 85%;
+		border: none;
+		border-radius: 5px;
+		margin: 0 auto;
+	}
+}
+
+.search-area{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	.search-box {
+		margin: 0 auto;
+		width: 70%;
+		display: flex;
+		justify-content: center;
+
+		.search-item {
+			border: 1px solid $primary-red;
+			border-radius: 4px;
+			font-family: 'Poiret One';
+			color: $primary-red;
+			font-size: 1.6em;
+			align-self: center;
+		}
+
+		.button {
+			background-color: $light-gray;
+			margin-left: 10px;
+			&:focus {
+				outline-color: $primary-red;
+			}
+		}
+
+		#search-query {
+			width: 60%;
+			padding: 6px;
+			background-color: $slate-navy;
+			&:focus {
+				outline-color: $primary-red;
+			}
+		}
+	}
+	.search-instructions {
+		font-family: 'Poiret One';
+		color: $light-gray;
+		margin: 5px auto;
+	}
+}
+
+.nav-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 8px;
+
+	#header {
+
+		.nav-bar-logo-link {
+			background: none;
+			border: none;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
+	.nav-bar-account-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		.nav-bar-account-button {
+			background: none;
+			border: none;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		.nav-bar-email {
+			font-family: "Poiret One";
+			margin: 8px auto;
+		}
+	}
+}
+
+.account-view {
+
+	.account-view-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		#logout-button {
+			border: 1px solid $primary-red;
+			border-radius: 4px;
+			background-color: $light-gray;
+			font-family: "Poiret One";
+			color: $primary-red; 
+			margin: 10px auto;
+			font-size: 1.5em;
+		}
+	}
+}
+
+.no-drops-container {
+	display: flex;
+	justify-content: center;
+	border: 1px solid $primary-red;
+	border-radius: 4px;
+	background-color: $slate-navy;
+	width: 70%; 
+	margin: 10px auto;
+
+	.no-drops-message {
+		text-align: center;
+		width: 60%;
+		color: $primary-red;
+		margin: 10px auto;
+		font-family: "Poiret One";
+	}
+}

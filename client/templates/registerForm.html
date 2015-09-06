@@ -1,0 +1,8 @@
+<div class='register-form-container'>
+	<form ng-controller="registerFormController as registerFormCtrl" ng-submit="registerFormCtrl.register()">
+		<input type='text' placeholder='Email' ng-model='registerFormCtrl.registerInfo.email'/>
+		<input type='text' placeholder='Password' ng-model='registerFormCtrl.registerInfo.password'/>
+		<input type='text' placeholder='Confirm Password' ng-model='registerFormCtrl.registerInfo.confirmPassword'/>
+		<input type='submit' value='Sign Up'/>
+	</form>
+</div>

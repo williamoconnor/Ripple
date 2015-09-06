@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="Ripple">
+<head>
+	<title>Ripple</title>
+	<link href='http://fonts.googleapis.com/css?family=Poiret One' rel='stylesheet' type='text/css'>
+	<link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
+	<script src="/angular/angular.js"></script>
+	<script src="/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="/app.js"></script>
+	<script type="text/javascript" src="/controllers/controllers.js"></script>
+	<script type="text/javascript" src="/directives/directives.js"></script>
+	<script type="text/javascript" src="/routes/routes.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+</head>
+<body>
+	<div class="login-page">
+		<div class='login-title-container'>
+			<h1>Ripple Sign In Page</h1>
+		</div>
+		<div class='form-container' ng-controller="loginPageController as loginCtrl">
+			<login-form ng-if="loginCtrl.newUser === false"></login-form>
+			<register-form ng-if="loginCtrl.newUser === true"></register-form>
+		</div>
+	</div>
+</body>
+</html>

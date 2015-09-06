@@ -1,0 +1,8 @@
+<div class='login-form-container'>
+	<form ng-controller="loginFormController as loginFormCtrl" ng-submit="loginFormCtrl.login()">
+		<input type='text' placeholder='Email' ng-model='loginFormCtrl.loginInfo.email'/>
+		<input type='text' placeholder='Password' ng-model='loginFormCtrl.loginInfo.password'/>
+		<input type='Submit' value='Login'/>
+	</form>
+	<a ng-click='loginCtrl.setNewUser()'>New User?</a>
+</div>

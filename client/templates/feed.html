@@ -1,0 +1,4 @@
+<div ng-repeat='drop in feed.drops' class="drop-container">
+	<drop droptype="'redrop'" songid="drop.soundcloud_track_id"></drop>
+</div>
+<no-drops ng-hide="feed.drops.length > 0"></no-drops>
