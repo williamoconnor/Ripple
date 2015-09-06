@@ -2,7 +2,7 @@
   "name": "RippleMean",
   "version": "1.0.0",
   "description": "Location based music sharing and streaming",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "0.10.32",
     "npm": "1.4.28"
