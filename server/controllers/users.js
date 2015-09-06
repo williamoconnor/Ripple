@@ -15,7 +15,7 @@ exports.register = function(req, res){
 
 	user.save(function (err){
 		if (err){
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			// send email
@@ -52,7 +52,7 @@ exports.register = function(req, res){
 exports.changePassword = function (req, res) {
 	User.update({ $and: [{ email: req.body.email }, { password: req.body.password }]}, { $set: { password: req.body.newPassword} }, function(err, user) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			res.status(204).json(user);
@@ -63,7 +63,7 @@ exports.changePassword = function (req, res) {
 exports.verifyUser = function (req, res) {
 	User.findByIdAndUpdate(ObjectId(req.params.userId), { $set: { verified: true } }, function (err, user) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			res.redirect("/#/verify/" + user._id)
@@ -74,7 +74,7 @@ exports.verifyUser = function (req, res) {
 exports.login = function (req, res){
 	User.findOne({ $and: [{ email: req.body.email }, { password: req.body.passord }]}, function (err, user) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else if(user){
 			if (user.verified === true) {
@@ -93,7 +93,7 @@ exports.login = function (req, res){
 exports.givePointsById = function (req, res) {
 	User.findByIdAndUpdate(ObjectId(req.body.userId), { $inc: { points: req.body.points } }, function(err, user){
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			res.json(user);
@@ -104,7 +104,7 @@ exports.givePointsById = function (req, res) {
 exports.getUserById = function(req, res) {
 	User.findById(ObjectId(req.params.userId), function(err, user){
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			res.json(user);

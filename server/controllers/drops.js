@@ -9,7 +9,7 @@ exports.getDrops = function(req, res) {
 	}).sort({created_at: -1}).limit(25).exec(
 	  function (err, drops) {
 	 	if (err) {
-	 		res.send(err);
+	 		res.status(500).send(err);
 	 	}
 	 	else {
 	 		res.json(drops);
@@ -38,7 +38,7 @@ exports.createDrop = function(req, res) {
 
 	drop.save(function(err) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 		}
 		else {
 			console.log(drop);
@@ -69,13 +69,13 @@ exports.reDrop = function(req, res) {
 
 	drop.save(function(err) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(err);
 			console.log(req.body.lastDropId);
 		}
 		else {	
 			Drop.findByIdAndUpdate(req.body.lastDropId, { most_recent: false }, function(err, update){
 				if (err) {
-					res.send(err);
+					res.status(500).send(err);
 					console.log(err);
 				}
 				else {
@@ -91,7 +91,7 @@ exports.getDropsForUser = function(req, res) {
 	Drop.find({user_id: req.params.userId}).sort({created_at: -1}).limit(25).
 		exec(function(err, drops){
 			if (err) {
-				res.send(err);
+				res.status(500).send(err);
 				console.log(err);
 			}
 			else {

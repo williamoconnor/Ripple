@@ -217,15 +217,16 @@
 			$http({method: 'POST', url: config.baseUrl + '/api/drops/' + routePath, data: body}).
 			success(function(result){
 				if (type === "drop") {
-					// set searching to 0
 					$scope.$parent.$parent.$parent.setSearching(false);
 	  				$scope.$parent.$parent.$parent.feed.drops.unshift(result);
 	  				$scope.$parent.$parent.$parent.feed.widgets.unshift(widget);
 	  				var widget = SC.Widget(result.soundcloud_track_id);
 	  				widget.bind(SC.Widget.Events.FINISH, $scope.$parent.$parent.$parent.playNext(0));
+
 					// check for duplicate
 				}
 				else if (type === "redrop") {
+					console.log("it's a redrop");
 					// remove the song from the feed
 					console.log(result);
 					var index = 0;
@@ -291,9 +292,7 @@
 		var ctrl = this;
 		$scope.searchResults = [];
 
-		$scope.search = function(query, elem){
-			console.log('tf');
-			
+		$scope.search = function(query, elem){			
 			SC.get('/tracks', { q: query, limit: 10 }, function(tracks) {
 				// will insert top 10 songs returned by SoundCloud into search modal
 				if (tracks.length == 0){
@@ -301,7 +300,12 @@
 				}
 				else {
 					console.log($scope);
-					$scope.$parent.searchResults = tracks;
+					$scope.$parent.searchResults = _.remove(tracks, function(track){
+						var index = _.findIndex($scope.$parent.feed.drops, function(drop){
+							return drop.soundcloud_track_id === track.id.toString();
+						});
+						return index === -1;
+					});
 					$scope.$parent.setSearching(true);
 					$scope.$apply();
 					$scope.searchQuery = null;
