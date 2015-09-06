@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
+var favicon = require("serve-favicon");
 
 // routes
 var dropRouter = require('./server/routes/dropRoutes');
@@ -24,6 +25,8 @@ app.use('/api/users', userRouter);
 // static files
 app.use(express.static('client'));
 app.use(express.static('bower_components'));
+
+app.use(favicon(__dirname + '/client/images/drop-icon.ico'));
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
