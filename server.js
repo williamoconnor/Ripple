@@ -25,9 +25,13 @@ mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.
 app.use('/api/drops', dropRouter);
 app.use('/api/users', userRouter);
 
-// static files
-app.use(express.static('client'));
-app.use(express.static('bower_components'));
+// local - static files
+// app.use(express.static('client'));
+// app.use(express.static('bower_components'));
+
+// heroku - static files
+app.use(express.static(path.join(process.env.PWD, 'client')));
+app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 
 app.use(favicon(__dirname + '/favicon.ico'));
 
@@ -39,7 +43,7 @@ var localPort = 3000;
 var herokuPort = 8080;
 
 app.listen(process.env.PORT || 3000, function (){
-	console.log('App running on port' + herokuPort);
+	console.log('App running on port ' + process.env.PORT);
 });
 
 module.exports = app;
