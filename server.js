@@ -38,7 +38,7 @@ app.get('/', function(req, res) {
 var localPort = 3000;
 var herokuPort = 8080;
 
-app.listen(herokuPort, function (){
+app.listen(process.env.PORT || 3000, function (){
 	console.log('App running on port' + herokuPort);
 });
 
