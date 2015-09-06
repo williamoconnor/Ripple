@@ -26,7 +26,7 @@ app.use('/api/users', userRouter);
 app.use(express.static('client'));
 app.use(express.static('bower_components'));
 
-app.use(favicon(__dirname + '/client/images/drop-icon.ico'));
+app.use(favicon(__dirname + '/favicon.ico'));
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
