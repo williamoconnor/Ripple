@@ -35,8 +35,11 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
 });
 
-app.listen(3000, function (){
-	console.log('App running on port 3000');
+var localPort = 3000;
+var herokuPort = 8080;
+
+app.listen(herokuPort, function (){
+	console.log('App running on port' + herokuPort);
 });
 
 module.exports = app;
