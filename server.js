@@ -15,8 +15,11 @@ var userRouter = require('./server/routes/userRoutes');
 // middleware
 var location = require('./server/middleware/location');
 
-// database
-mongoose.connect('mongodb://localhost/rippleTest');
+// database - local
+//mongoose.connect('mongodb://localhost/rippleTest');
+
+// database - heroku test
+mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
 
 // app
 app.use('/api/drops', dropRouter);
