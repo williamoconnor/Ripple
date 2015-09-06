@@ -30,6 +30,7 @@ app.use('/api/users', userRouter);
 // app.use(express.static('bower_components'));
 
 // heroku - static files
+console.log(path.join(process.env.PWD, 'client'))
 app.use(express.static(path.join(process.env.PWD, 'client')));
 app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 
