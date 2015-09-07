@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
+var bcrypt = require('bcrypt-nodejs');
 
 exports.register = function(req, res){
 	console.log(req.body);
@@ -72,20 +73,25 @@ exports.verifyUser = function (req, res) {
 }
 
 exports.login = function (req, res){
-	User.findOne({ $and: [{ email: req.body.email }, { password: req.body.passord }]}, function (err, user) {
+	console.log(req.body);
+	User.findOne({ email: req.body.email }, function (err, user) {
 		if (err) {
-			res.status(500).send(err);
+			console.log(err);
+			res.status(500).json(err);
 		}
-		else if(user){
+		else if(user /*&& bcrypt.compareSync(req.body.password, user.password)*/){
 			if (user.verified === true) {
+				console.log('Yay!');
 				res.json(user);
 			}
 			else {
-				res.send('First verify account.'); // give option to resend email
+				console.log('shit');
+				res.json({result: 'First verify account.'}); // give option to resend email
 			}
 		}
 		else {
-			res.send("Login Failed");
+			console.log('damn');
+			res.json({result: "Login Failed"});
 		}
 	});
 }

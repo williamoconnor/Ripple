@@ -1,6 +1,6 @@
 {
   "name": "RippleMean",
-  "main": "index.js",
+  "main": "server.js",
   "version": "0.0.0",
   "homepage": "https://github.com/williamoconnor/Ripple",
   "authors": [

@@ -1,7 +1,7 @@
 (function(){
 	var config = {
-		//baseUrl: 'http://localhost:3000'
-		baseUrl: 'http://ripplemusicapp.herokuapp.com/'
+		baseUrl//: 'http://localhost:3000'
+		: 'http://ripplemusicapp.herokuapp.com/'
 	}
 
 	// CONTROLLERS
@@ -195,6 +195,7 @@
 				body.previousDropperIds = song.previous_dropper_ids;
 				body.soundcloudTrackId = song.soundcloud_track_id;
 				body.trackName = song.name;
+				body.artist = song.artist
 				routePath = "redrop";
 			}
 			else { // search
@@ -204,6 +205,7 @@
 				feed = app.feed;
 				body.trackName = song.title;
 				body.soundcloudTrackId = song.id;
+				body.artist = song.label_name;
 			}
 
 			// craft the request body:

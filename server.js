@@ -16,7 +16,7 @@ var userRouter = require('./server/routes/userRoutes');
 var location = require('./server/middleware/location');
 
 // database - local
-//mongoose.connect('mongodb://localhost/rippleTest');
+// mongoose.connect('mongodb://localhost/rippleTest');
 
 // database - heroku test
 mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
@@ -40,11 +40,12 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
 });
 
-var localPort = 3000;
-var herokuPort = 8080;
-
 app.listen(process.env.PORT || 3000, function (){
 	console.log('App running on port ' + process.env.PORT);
 });
+
+// app.listen(3000, function (){
+// 	console.log('App running on port ' + 3000);
+// });
 
 module.exports = app;

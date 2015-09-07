@@ -20,6 +20,9 @@ var dropSchema = new mongoose.Schema({
 		type: String,
 		require: true
 	},
+	artist: {
+		type: String
+	},
 	artwork_url: {
 		type: String
 	},
