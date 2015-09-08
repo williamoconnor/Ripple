@@ -75,3 +75,9 @@ API Methods:
 			{
 				dropId: string
 			}
+
+
+local vs heroku
+server.js
+controllers.js
+verify.htnl
