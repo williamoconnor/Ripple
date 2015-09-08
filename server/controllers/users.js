@@ -30,7 +30,7 @@ exports.register = function(req, res){
 			}
 
 			var client = nodemailer.createTransport(sgTransport(options));
-			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/'; // 'http://localhost:3000'
+			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/'; //'http://localhost:3000'
 
 
 			var email = {
