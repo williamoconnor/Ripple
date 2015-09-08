@@ -80,4 +80,5 @@ API Methods:
 local vs heroku
 server.js
 controllers.js
-verify.htnl
+Strings.h
+users.js

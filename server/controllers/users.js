@@ -8,14 +8,16 @@ var bcrypt = require('bcrypt-nodejs');
 exports.register = function(req, res){
 	console.log(req.body);
 	var user = new User({
+		username: req.body.email,
 		email: req.body.email,
 		password: req.body.password,
 		latitude: req.body.latitude,
-		longitude: req.body.longitude,
+		longitude: req.body.longitude
 	});
 
 	user.save(function (err){
 		if (err){
+			console.log(err);
 			res.status(500).send(err);
 		}
 		else {
@@ -28,13 +30,15 @@ exports.register = function(req, res){
 			}
 
 			var client = nodemailer.createTransport(sgTransport(options));
+			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/'; // 'http://localhost:3000'
+
 
 			var email = {
 			  from: 'williamboconnor@gmail.com',
 			  to: user.email,
 			  subject: 'Welcome to Ripple',
 			  text: 'Welcome to Ripple!',
-			  html: '<a href="http://localhost:3000/api/users/verify/' + user._id + '">Verfiy account</a>'
+			  html: '<a href="' + baseURL + user._id + '">Verfiy account</a>'
 			};
 
 			client.sendMail(email, function(err, info){
@@ -79,7 +83,7 @@ exports.login = function (req, res){
 			console.log(err);
 			res.status(500).json(err);
 		}
-		else if(user /*&& bcrypt.compareSync(req.body.password, user.password)*/){
+		else if(user && bcrypt.compareSync(req.body.password, user.password)){
 			if (user.verified === true) {
 				console.log('Yay!');
 				res.json(user);
