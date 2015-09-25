@@ -1,7 +1,7 @@
 (function(){
 	var config = {
-		baseUrl: 'http://localhost:3000'
-		//'http://ripplemusicapp.herokuapp.com'
+		baseUrl: //'http://localhost:3000'
+		'http://ripplemusicapp.herokuapp.com'
 	};
 
 	// CONTROLLERS
