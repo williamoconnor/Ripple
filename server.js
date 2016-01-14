@@ -36,6 +36,15 @@ else if (mode == 'test'){
 	app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 }
 
+// database - heroku live
+else if (mode == 'live'){
+	mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
+	// static files
+	console.log(path.join(process.env.PWD, 'client'))
+	app.use(express.static(path.join(process.env.PWD, 'client')));
+	app.use(express.static(path.join(process.env.PWD, 'bower_components')));
+}
+
 // app
 app.use('/api/drops', dropRouter);
 app.use('/api/users', userRouter);
