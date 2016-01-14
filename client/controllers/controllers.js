@@ -1,6 +1,6 @@
-var mode = 'local'; 
+// var mode = 'local'; 
 // var mode = 'testing';
-// var mode = 'live';
+var mode = 'live';
 
 (function(){
 	var config = {
