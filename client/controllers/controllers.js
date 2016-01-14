@@ -1,8 +1,14 @@
+var mode = 'local'; 
+// var mode = 'testing';
+// var mode = 'live';
+
 (function(){
 	var config = {
-		baseUrl: //'http://localhost:3000'
-		'http://ripplemusicapp.herokuapp.com'
+		baseUrl: 'http://ripplemusicapp.herokuapp.com'
 	};
+	if (mode == 'local') {
+		config.baseUrl = 'http://williams-macbook-pro-2.local:3000';
+	}
 
 	// CONTROLLERS
 	angular.module('Ripple').controller('appController', ['$rootScope', '$scope', '$http', '$window', '$cookies', function($rootScope, $scope, $http, $window, $cookies){
@@ -365,11 +371,11 @@
 					$window.location.href = '/#/';
 				}
 				else {
-					alert('Login Failed');
+					alert('Login Failed. No data was returned');
 				}
 			}).
 			error(function(err){
-				alert('Login failed');
+				alert('Login failed. Failed to submit the request');
 			});
 			this.loginInfo = {};
 		}

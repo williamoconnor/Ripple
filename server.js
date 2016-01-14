@@ -1,3 +1,7 @@
+var mode = 'local'; 
+// var mode = 'testing';
+// var mode = 'live';
+
 // node modules
 var express = require('express');
 var app = express();
@@ -16,23 +20,25 @@ var userRouter = require('./server/routes/userRoutes');
 var location = require('./server/middleware/location');
 
 // database - local
-//mongoose.connect('mongodb://localhost/rippleTest');
+if (mode == 'local'){
+	mongoose.connect('mongodb://localhost/rippleTest');
+	//static files
+	app.use(express.static('client'));
+	app.use(express.static('bower_components'));
+}
 
 // database - heroku test
-mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
+else if (mode == 'test'){
+	mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
+	// static files
+	console.log(path.join(process.env.PWD, 'client'))
+	app.use(express.static(path.join(process.env.PWD, 'client')));
+	app.use(express.static(path.join(process.env.PWD, 'bower_components')));
+}
 
 // app
 app.use('/api/drops', dropRouter);
 app.use('/api/users', userRouter);
-
-// local - static files
-// app.use(express.static('client'));
-// app.use(express.static('bower_components'));
-
-// heroku - static files
-console.log(path.join(process.env.PWD, 'client'))
-app.use(express.static(path.join(process.env.PWD, 'client')));
-app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 
 app.use(favicon(__dirname + '/favicon.ico'));
 
@@ -41,7 +47,7 @@ app.get('/', function(req, res) {
 });
 
 app.listen(process.env.PORT || 3000, function (){
-	console.log('App running on port ' + process.env.PORT);
+	console.log('App running on port ' + process.env.PORT || 3000);
 });
 
 // app.listen(3000, function (){

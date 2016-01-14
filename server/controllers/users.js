@@ -1,3 +1,7 @@
+var mode = 'local'; 
+// var mode = 'testing';
+// var mode = 'live';
+
 var User = require('../models/user');
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
@@ -8,7 +12,7 @@ var bcrypt = require('bcrypt-nodejs');
 exports.register = function(req, res){
 	console.log(req.body);
 	var user = new User({
-		username: req.body.email,
+		// username: req.body.email,
 		email: req.body.email,
 		password: req.body.password,
 		latitude: req.body.latitude,
@@ -30,8 +34,10 @@ exports.register = function(req, res){
 			}
 
 			var client = nodemailer.createTransport(sgTransport(options));
-			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/'; 
-				//'http://localhost:3000/api/users/verify/';
+			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/';
+			if (mode == 'local') {
+				baseURL = 'http://williams-macbook-pro-2.local:3000/api/users/verify/';
+			} 
 
 			var email = {
 			  from: 'williamboconnor@gmail.com',

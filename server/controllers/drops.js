@@ -12,6 +12,7 @@ exports.getDrops = function(req, res) {
 	 		res.status(500).send(err);
 	 	}
 	 	else {
+	 		res.set('Access-Control-Allow-Origin', '*');
 	 		res.json(drops);
 	 	}
 	});
