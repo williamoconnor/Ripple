@@ -1,5 +1,5 @@
-var mode = 'local'; 
-// var mode = 'testing';
+// var mode = 'local'; 
+var mode = 'test';
 // var mode = 'live';
 
 var User = require('../models/user');
