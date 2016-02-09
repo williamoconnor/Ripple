@@ -24,8 +24,8 @@ exports.register = function(req, res){
 
 	user.save(function (err){
 		if (err){
-			console.log(err);
-			res.status(500).json(err);
+			console.log("THIS IS THE ERROR: " + err);
+			res.status(400).json(err);
 		}
 		else {
 			// send email
