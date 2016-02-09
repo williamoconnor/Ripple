@@ -1,13 +1,13 @@
-// var mode = 'local'; 
+var mode = 'local'; 
 // var mode = 'testing';
-var mode = 'live';
+// var mode = 'live';
 
 (function(){
 	var config = {
 		baseUrl: 'http://ripplemusicapp.herokuapp.com'
 	};
 	if (mode == 'local') {
-		config.baseUrl = 'http://williams-macbook-pro-2.local:3000';
+		config.baseUrl = 'http://localhost:3000';//'http://williams-macbook-pro-2.local:3000';
 	}
 
 	// CONTROLLERS
@@ -165,6 +165,31 @@ var mode = 'live';
 	angular.module('Ripple').controller('feedController', ['$http', '$scope', function($http, $scope){
 		var feed = this;
 		var app = $scope.$parent;
+	}]);
+
+	angular.module('Ripple').controller('newPasswordController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams){
+		console.log('sup bitch!');
+
+		$scope.newPasswordData = {
+			email: "",
+			userId: $routeParams.userId,
+			password: "",
+			confirmPassword: "" // make sure they match
+		};
+
+		$scope.submit = function(form) {
+			console.log('submit!');
+			var data = $scope.newPasswordData;
+			$http({method: 'POST', url: config.baseUrl + '/api/users/reset-password', data: data}).
+			success(function(response) {
+				console.log('successfully changed password');
+				console.log(response);
+			}).
+			error(function(err) {
+				console.log('fucking failed');
+				console.log(err);
+			});
+		};
 	}]);
 
 	angular.module('Ripple').controller('dropController', ['$scope', '$http', '$sce', '$rootScope', function($scope, $http, $sce, $rootScope){

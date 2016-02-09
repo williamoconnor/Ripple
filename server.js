@@ -1,6 +1,6 @@
-// var mode = 'local'; 
+var mode = 'local'; 
 // var mode = 'testing';
-var mode = 'live';
+// var mode = 'live';
 
 // node modules
 var express = require('express');
@@ -11,10 +11,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var favicon = require("serve-favicon");
+var cors = require('cors');
 
 // routes
 var dropRouter = require('./server/routes/dropRoutes');
 var userRouter = require('./server/routes/userRoutes');
+app.use(cors());
 
 // middleware
 var location = require('./server/middleware/location');

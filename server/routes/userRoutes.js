@@ -14,8 +14,8 @@ router.route('/register')
 		usersController.register(req, res);
 	});
 
-router.route('/reset-password')
-	.get(encryptPass, function(req, res){
+router.route('/reset-password') // actually changes the password of the user
+	.post(bodyJson, encryptPass, function(req, res){
 		usersController.changePassword(req, res);
 	});
 
@@ -38,5 +38,16 @@ router.route('/:userId')
 	.get(function(req, res){
 		usersController.getUserById(req, res);
 	});
+
+router.route('/forgot-password') // generates the link that gets sent in the email
+	.post(bodyJson, function(req, res){
+		usersController.forgotPassword(req, res);
+	})
+
+router.route('/new-password/:token') // renders the page with the form to reset the password
+	.get(function(req, res){
+		usersController.resetPassword(req, res);
+	});
+
 
 module.exports = router;

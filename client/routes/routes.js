@@ -14,6 +14,12 @@
 		.when('/verify/:userId', {
 			templateUrl: '../templates/verify.html'
 		})
+		.when('/expired', {
+			templateUrl: '../templates/expired.html'
+		})
+		.when('/:userId/:token', {
+			templateUrl: '../templates/newPassword.html'
+		})
 		.otherwise({
 			redirectTo: '/'
 		})

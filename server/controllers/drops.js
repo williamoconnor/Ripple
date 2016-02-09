@@ -1,4 +1,5 @@
 var Drop = require('../models/drop');
+var userController = require('./users');
 
 exports.getDrops = function(req, res) {
 	Drop.find({
@@ -83,7 +84,14 @@ exports.reDrop = function(req, res) {
 				}
 				else {
 					console.log(update);
-					res.json(drop);
+					var pointsResult = userController.givePointsById(req.body.previous_dropper_ids[1], 10);
+					if (pointsResult.result === "success") {
+						res.json({drop: drop});
+					}
+					else {
+						var result = {points: pointsResult, drop: drop};
+						res.json(result);
+					}
 				}
 			});
 		}
