@@ -13,6 +13,7 @@ exports.getDrops = function(req, res) {
 	 		res.status(500).send(err);
 	 	}
 	 	else {
+	 		// only want unique - handled with insertion
 	 		res.set('Access-Control-Allow-Origin', '*');
 	 		res.json(drops);
 	 	}
@@ -110,3 +111,5 @@ exports.getDropsForUser = function(req, res) {
 			}
 		});
 }
+
+

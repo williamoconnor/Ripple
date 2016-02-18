@@ -1,5 +1,5 @@
-// var mode = 'local'; 
-var mode = 'test';
+var mode = 'local'; 
+// var mode = 'test';
 // var mode = 'live';
 
 var User = require('../models/user');
@@ -11,6 +11,7 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 var bcrypt = require('bcrypt-nodejs');
 var randomstring = require("randomstring");
 var Drop = require('../models/drop');
+var sendGridInfo = require('./sendGridInfo.js');
 
 exports.register = function(req, res){
 	console.log(req.body);
@@ -31,8 +32,8 @@ exports.register = function(req, res){
 			// send email
 			var options = {
 			  auth: {
-			    api_user: 'kwitheringto',
-			    api_key: 'Glrz007009'
+			    api_user: sendGridInfo.api_user,
+			    api_key: sendGridInfo.api_key
 			  }
 			}
 
@@ -44,7 +45,7 @@ exports.register = function(req, res){
 			} 
 
 			var email = {
-			  from: 'williamboconnor@gmail.com',
+			  from: sendGridInfo.fromEmail,
 			  to: user.email,
 			  subject: 'Welcome to Ripple',
 			  text: 'Welcome to Ripple!',

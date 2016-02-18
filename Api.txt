@@ -79,7 +79,7 @@ API Methods:
 
 local vs heroku
 server.js
-controllers.js
+client/controllers.js
 Strings.h
-users.js
-authentication.js
+server/controllers/users.js
+ionic/ripple/.../authentication.js
