@@ -1,5 +1,5 @@
-var mode = 'local'; 
-// var mode = 'test';
+// var mode = 'local'; 
+var mode = 'test';
 // var mode = 'live';
 
 var User = require('../models/user');
@@ -219,8 +219,9 @@ exports.login = function (req, res){
 }
 
 // exports.givePointsById = function (req, res) {
-exports.givePointsById = function(userId, points) {
-	User.findByIdAndUpdate(ObjectId(userId), { $inc: { points: points } }, function(err, user){
+exports.givePointsById = function(userIds, points) {
+	// compute points here
+	User.findByIdAndUpdate({_id: {"$in":userIds}}, { $inc: { points: points } }, function(err, users){
 		if (err) {
 			// res.status(500).send(err);
 			return {result: "failure", error: err};
@@ -228,7 +229,7 @@ exports.givePointsById = function(userId, points) {
 		else {
 	 		// res.set('Access-Control-Allow-Origin', '*');
 			// res.json({result: "success", user: user});
-			return {result: "success", user: user};
+			return {result: "success", users: users};
 		}
 	});
 }

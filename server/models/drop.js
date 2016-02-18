@@ -67,6 +67,16 @@ var dropSchema = new mongoose.Schema({
 		type: Boolean,
 		require: true
 	},
+	merged: {
+		type: Boolean,
+		require: true,
+		default: false
+	},
+	merges: { // when a drop (a) collides with another one (b), add a to b's merges. Then when b is dropped, give points to a as well
+		type: [Schema.Types.ObjectId], 	// need a method to look for merges
+		require: false,
+		references: 'Drop'
+	},
 	created_at: {
 		type: Date
 	},
