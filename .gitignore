@@ -9,5 +9,4 @@ npm-debug.log
 # bower
 bower_components/*
 
-#sendGrid config
-server/controllers/sendGridInfo.js
+
