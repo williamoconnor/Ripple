@@ -88,58 +88,56 @@ exports.forgotPassword = function (req, res) { // generates the link that gets s
 		}
 		else {
 			if (user) {
-				console.log(user);
+				var userToken = new ResetToken ({
+					user_id: user._id,
+					token: token
+				});
+				userToken.save(function(err){
+					if (err) {
+						console.log(err);
+						res.status(500).json(err);
+					}
+					else {
+						// send email
+						var options = {
+						  auth: {
+						    api_user: sendGridInfo.options.api_user,
+						    api_key: sendGridInfo.options.api_key
+						  }
+						}
+
+						var client = nodemailer.createTransport(sgTransport(options));
+						var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/new-password/';
+						if (mode == 'local') {
+							baseURL = 'http://localhost:3000/api/users/new-password/';
+							//'http://williams-macbook-pro-2.local:3000/api/users/verify/';
+						} 
+
+						var email = {
+						  from: sendGridInfo.options.fromEmail,
+						  to: req.body.email,
+						  subject: 'Ripple Password Reset',
+						  text: 'Ripple Password Reset',
+						  html: '<p>Follow link to <a href="' + baseURL + token + '">reset password</a></p>'
+						};
+
+						client.sendMail(email, function(err, info){
+						    if (err){
+						      console.log(err);
+						    }
+						    else {
+						      console.log('Message sent: ' + info.response);
+						    }
+						});
+
+				 		res.set('Access-Control-Allow-Origin', '*');
+						res.status(200).json({result:"success", message:"email sent"});
+					}
+				});
 			}
 			else {
-				console.log('no user found');
+				res.json({result:"failed", message:"no user with that email"});
 			}
-			var userToken = new ResetToken ({
-				user_id: user._id,
-				token: token
-			});
-			userToken.save(function(err){
-				if (err) {
-					console.log(err);
-					res.status(500).json(err);
-				}
-				else {
-					// send email
-					var options = {
-					  auth: {
-					    api_user: sendGridInfo.options.api_user,
-					    api_key: sendGridInfo.options.api_key
-					  }
-					}
-
-					var client = nodemailer.createTransport(sgTransport(options));
-					var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/new-password/';
-					if (mode == 'local') {
-						baseURL = 'http://localhost:3000/api/users/new-password/';
-						//'http://williams-macbook-pro-2.local:3000/api/users/verify/';
-					} 
-
-					var email = {
-					  from: sendGridInfo.options.fromEmail,
-					  to: req.body.email,
-					  subject: 'Ripple Password Reset',
-					  text: 'Ripple Password Reset',
-					  html: '<p>Follow link to <a href="' + baseURL + token + '">reset password</a></p>'
-					};
-
-					client.sendMail(email, function(err, info){
-					    if (err){
-					      console.log(err);
-					    }
-					    else {
-					      console.log('Message sent: ' + info.response);
-					    }
-					});
-
-			 		res.set('Access-Control-Allow-Origin', '*');
-					res.status(200).json({result:"success", message:"email sent"});
-				}
-			});
-			
 		}
 	});
 		
