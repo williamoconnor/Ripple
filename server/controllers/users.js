@@ -87,7 +87,12 @@ exports.forgotPassword = function (req, res) { // generates the link that gets s
 			res.send(err);
 		}
 		else {
-			console.log(Object.keys(user));
+			if (user) {
+				console.log(user);
+			}
+			else {
+				console.log('no user found');
+			}
 			var userToken = new ResetToken ({
 				user_id: user._id,
 				token: token
