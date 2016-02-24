@@ -11,7 +11,7 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 var bcrypt = require('bcrypt-nodejs');
 var randomstring = require("randomstring");
 var Drop = require('../models/drop');
-var sendGridInfo.options = require('./sendGridInfo.options.js');
+var sendGridInfo = require('./sendGridInfo.js');
 
 exports.register = function(req, res){
 	console.log(req.body);
