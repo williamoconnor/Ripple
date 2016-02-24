@@ -11,7 +11,7 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 var bcrypt = require('bcrypt-nodejs');
 var randomstring = require("randomstring");
 var Drop = require('../models/drop');
-var sendGridInfo = require('./sendGridInfo.js');
+var sendGridInfo.options = require('./sendGridInfo.options.js');
 
 exports.register = function(req, res){
 	console.log(req.body);
@@ -32,8 +32,8 @@ exports.register = function(req, res){
 			// send email
 			var options = {
 			  auth: {
-			    api_user: sendGridInfo.api_user,
-			    api_key: sendGridInfo.api_key
+			    api_user: sendGridInfo.options.api_user,
+			    api_key: sendGridInfo.options.api_key
 			  }
 			}
 
@@ -45,7 +45,7 @@ exports.register = function(req, res){
 			} 
 
 			var email = {
-			  from: sendGridInfo.fromEmail,
+			  from: sendGridInfo.options.fromEmail,
 			  to: user.email,
 			  subject: 'Welcome to Ripple',
 			  text: 'Welcome to Ripple!',
@@ -100,8 +100,8 @@ exports.forgotPassword = function (req, res) { // generates the link that gets s
 					// send email
 					var options = {
 					  auth: {
-					    api_user: 'kwitheringto',
-					    api_key: 'Glrz007009'
+					    api_user: sendGridInfo.options.api_user,
+					    api_key: sendGridInfo.options.api_key
 					  }
 					}
 
@@ -113,7 +113,7 @@ exports.forgotPassword = function (req, res) { // generates the link that gets s
 					} 
 
 					var email = {
-					  from: 'williamboconnor@gmail.com',
+					  from: sendGridInfo.options.fromEmail,
 					  to: req.body.email,
 					  subject: 'Ripple Password Reset',
 					  text: 'Ripple Password Reset',
@@ -121,8 +121,8 @@ exports.forgotPassword = function (req, res) { // generates the link that gets s
 					};
 
 					client.sendMail(email, function(err, info){
-					    if (err ){
-					      console.log(error);
+					    if (err){
+					      console.log(err);
 					    }
 					    else {
 					      console.log('Message sent: ' + info.response);

@@ -32,6 +32,10 @@ var userSchema = new mongoose.Schema({
 	longitude: {
 		type: Number
 	},
+	rank: {
+		type: Number,
+		default: 0
+	},
 	created_at: {
 		type: Date
 	},
