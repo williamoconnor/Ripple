@@ -6,7 +6,7 @@ function encrypt (req, res, next) {
 		res.status(406).send("Passwords don't match");
 	}
 	else {
-		console.log(req.body);
+		// console.log(req.body);
 		req.body.password = bcrypt.hashSync(req.body.password, salt);
 		if (req.body.newPassword) {
 			req.body.newPassword = bcrypt.hashSync(req.body.newPassword, salt);

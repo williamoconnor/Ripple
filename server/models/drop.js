@@ -67,6 +67,10 @@ var dropSchema = new mongoose.Schema({
 		type: Boolean,
 		require: true
 	},
+	dropper_rank: {
+		type: Number,
+		default: 0
+	},
 	merged: {
 		type: Boolean,
 		require: true,

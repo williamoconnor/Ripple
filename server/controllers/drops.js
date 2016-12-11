@@ -22,7 +22,7 @@ exports.getDrops = function(req, res) {
 }
 
 exports.createDrop = function(req, res) {
-	console.log(req.body);
+	// console.log(req.body);
 
 	// check if this drop has already been made in this area
 	Drop.find({
@@ -32,7 +32,7 @@ exports.createDrop = function(req, res) {
 		
 	}).exec(function(err, drops) {
 		var same_id = drops.filter(function(drop){
-			return drop.soundcloud_track_id === req.body.soundcloud_track_id;
+			return drop.soundcloud_track_id === req.body.soundcloudTrackId;
 		});
 		if (same_id.length > 0) { // it's a redrop
 			var drop = same_id[0];
@@ -42,9 +42,10 @@ exports.createDrop = function(req, res) {
 			req.body.latitudeTop = drop.latitude_top;
 			req.body.longitudeLeft = drop.longitude_left;
 			req.body.longitudeRight = drop.longitude_right;
-			req.body.previousDropperIds = drop.previousDropperIds.push(req.body.userId);
+			req.body.previousDropperIds = drop.previous_dropper_ids.push(req.body.userId);
 			req.body.lastDropId = drop._id;
-			redrop(req, res);
+			req.body.dropperRank = req.body.userRank > drop.dropper_rank ? req.body.userRank : drop.dropper_rank;
+			module.exports.reDrop(req, res);
 		}
 		else { // new drop
 			var drop = new Drop({
@@ -62,6 +63,7 @@ exports.createDrop = function(req, res) {
 				longitude_left: req.body.longitudeLeft,
 				longitude_right: req.body.longitudeRight,
 				previous_dropper_ids: [req.body.userId],
+				dropper_rank: req.body.userRank,
 				most_recent: true,
 				merged: false
 			});
@@ -71,7 +73,6 @@ exports.createDrop = function(req, res) {
 					res.status(500).send(err);
 				}
 				else {
-					console.log(drop);
 					res.json(drop);
 				}
 			});
@@ -98,15 +99,18 @@ exports.reDrop = function(req, res) {
 		longitude_right: req.body.longitudeRight,
 		last_drop: req.body.lastDropId,
 		previous_dropper_ids: req.body.previousDropperIds,
+		dropper_rank: req.body.dropperRank,
 		most_recent: true
 	});
 
 	drop.save(function(err, new_drop) {
 		if (err) {
-			res.status(500).send(err);
 			console.log(req.body.lastDropId);
+			console.log(error);
+			res.status(500).send(err);
 		}
-		else {	
+		else {
+			console.log(req.body.lastDropId);
 			Drop.findByIdAndUpdate(req.body.lastDropId, { most_recent: false }, function(err, update){
 				if (err) {
 					res.status(500).send(err);

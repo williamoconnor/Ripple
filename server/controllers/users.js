@@ -1,6 +1,5 @@
-// var mode = 'local'; 
-var mode = 'test';
-// var mode = 'live';
+var modeObj = require('../../mode.js');
+var mode = modeObj.mode;
 
 var User = require('../models/user');
 var ResetToken = require('../models/resetPasswordToken')
@@ -12,11 +11,11 @@ var bcrypt = require('bcrypt-nodejs');
 var randomstring = require("randomstring");
 var Drop = require('../models/drop');
 var sendGridInfo = require('./sendGridInfo.js');
+var rankings = require('./rankings.js');
 
 exports.register = function(req, res){
-	console.log(req.body);
 	var user = new User({
-		// username: req.body.email,
+		username: req.body.email,
 		email: req.body.email,
 		password: req.body.password,
 		latitude: req.body.latitude,
@@ -54,7 +53,7 @@ exports.register = function(req, res){
 
 			client.sendMail(email, function(err, info){
 			    if (err ){
-			      console.log(error);
+			      console.log(err);
 			    }
 			    else {
 			      console.log('Message sent: ' + info.response);
@@ -68,13 +67,13 @@ exports.register = function(req, res){
 
 exports.changePassword = function (req, res) { // actually changes the password of the user
 	console.log(req.body);
-	User.update({ $and: [{_id: req.body.userId}, { email: req.body.email }]}, { $set: { password: req.body.password} }, function(err, user) {
+	User.update({ $and: [{_id: req.body.userId}, { email: req.body.email }]}, { $set: { password: req.body.password} }, function(err, result) {
 		if (err) {
-			res.status(500).send(err);
+			res.status(400).send(err);
 		}
 		else {
 	 		res.set('Access-Control-Allow-Origin', '*');
-			res.status(204).json(user);
+			res.status(200).json(result);
 		}
 	});
 }
@@ -183,6 +182,7 @@ exports.login = function (req, res){
 			res.status(500).json(err);
 		}
 		else if(user && bcrypt.compareSync(req.body.password, user.password)){
+			console.log(user);
 			if (user.verified === true) {
 				console.log('Yay!');
 				// query for drops
@@ -222,10 +222,11 @@ exports.login = function (req, res){
 	});
 }
 
-// exports.givePointsById = function (req, res) {
-exports.givePointsById = function(userIds, points) {
+exports.givePointsById = function (req, res) {
+// exports.givePointsById = function(userIds, points) {
 	// compute points here
-	User.findByIdAndUpdate({_id: {"$in":userIds}}, { $inc: { points: points } }, function(err, users){
+	var rank = rankings.compute(req.body.points);
+	User.findByIdAndUpdate({_id: {"$in":req.body.userIds}}, { $inc: { points: req.body.points }, $set: { rank: rank } }, function(err, users){
 		if (err) {
 			// res.status(500).send(err);
 			return {result: "failure", error: err};

@@ -1,6 +1,5 @@
-// var mode = 'local'; 
-var mode = 'test';
-// var mode = 'live';
+var modeObj = require('../../mode.js');
+var mode = modeObj.mode;
 
 (function(){
 	var config = {
