@@ -22,7 +22,7 @@ exports.getDrops = function(req, res) {
 }
 
 exports.createDrop = function(req, res) {
-	// console.log(req.body);
+	console.log(req.body);
 
 	// check if this drop has already been made in this area
 	Drop.find({
@@ -36,13 +36,15 @@ exports.createDrop = function(req, res) {
 		});
 		if (same_id.length > 0) { // it's a redrop
 			var drop = same_id[0];
+			var pdi = drop.previous_dropper_ids;
+			pdi.push(req.body.userId);
 			req.body.latitude = drop.latitude;
 			req.body.longitude = drop.longitude;
 			req.body.latitudeBottom = drop.latitude_bottom;
 			req.body.latitudeTop = drop.latitude_top;
 			req.body.longitudeLeft = drop.longitude_left;
 			req.body.longitudeRight = drop.longitude_right;
-			req.body.previousDropperIds = drop.previous_dropper_ids.push(req.body.userId);
+			req.body.previousDropperIds = pdi;
 			req.body.lastDropId = drop._id;
 			req.body.dropperRank = req.body.userRank > drop.dropper_rank ? req.body.userRank : drop.dropper_rank;
 			module.exports.reDrop(req, res);
@@ -83,6 +85,7 @@ exports.createDrop = function(req, res) {
 }
 
 exports.reDrop = function(req, res) {
+	console.log(req.body);
 	var drop = new Drop({
 		user_id: req.body.userId,
 		stream_url: req.body.streamUrl, 
@@ -105,12 +108,12 @@ exports.reDrop = function(req, res) {
 
 	drop.save(function(err, new_drop) {
 		if (err) {
-			console.log(req.body.lastDropId);
-			console.log(error);
+			// console.log("hi fucker");
+			// console.log(req.body.lastDropId);
+			console.log(err);
 			res.status(500).send(err);
 		}
 		else {
-			console.log(req.body.lastDropId);
 			Drop.findByIdAndUpdate(req.body.lastDropId, { most_recent: false }, function(err, update){
 				if (err) {
 					res.status(500).send(err);
@@ -129,24 +132,21 @@ exports.reDrop = function(req, res) {
 						var drop_ids = drops.map(function(drop_found) {
 							return drop_found._id;
 						});
-						Drop.update({_id: {"$in": drop_ids}}, {$set: {merged: true, merges: drop.merges.push(new_drop._id)}}, function(err, updated_drop){
+						var merges = drop.merges;
+						merges.push(new_drop._id);
+						Drop.update({_id: {"$in": drop_ids}}, {$set: {merged: true, merges: merges}}, function(err, updated_drop){
 							if (err) {
 								res.status(500).send(err);
 							}
 							else {
-						 		res.set('Access-Control-Allow-Origin', '*');
-								res.json({drop: new_drop});
+								userController.attributePointsToUsers(req.body.previousDropperIds, 10, function(pointsResult) {
+									var result = {points: pointsResult, drop: new_drop};
+						 			res.set('Access-Control-Allow-Origin', '*');
+									res.json(result);
+								});
 							}
 						});
 
-						var pointsResult = userController.givePointsById(req.body.previous_dropper_ids.concat(drop_ids), 10);
-						var result = {points: pointsResult, drop: new_drop};
-						if (pointsResult.result === "success") {
-							res.json(result);
-						}
-						else {
-							res.json(result);
-						}
 
 					});
 					

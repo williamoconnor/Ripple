@@ -239,6 +239,22 @@ exports.givePointsById = function (req, res) {
 	});
 }
 
+exports.attributePointsToUsers = function(userIds, points, callback) {
+		// compute points here
+	var rank = rankings.compute(points);
+	User.findByIdAndUpdate({_id: {"$in":userIds}}, { $inc: { points: points }, $set: { rank: rank } }, function(err, users){
+		if (err) {
+			// res.status(500).send(err);
+			callback({result: "failure", error: err});
+		}
+		else {
+	 		// res.set('Access-Control-Allow-Origin', '*');
+			// res.json({result: "success", user: user});
+			callback({result: "success", users: users});
+		}
+	});
+}
+
 exports.getUserById = function(req, res) {
 	User.findById(ObjectId(req.params.userId), function(err, user){
 		if (err) {
