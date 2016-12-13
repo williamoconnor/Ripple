@@ -1,3 +1,3 @@
 // exports.mode = 'local';
-// module.exports = 'test';
-module.exports = 'live';
+exports.mode = 'test';
+// exports.mode = 'live';
