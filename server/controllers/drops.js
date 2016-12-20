@@ -139,10 +139,22 @@ exports.reDrop = function(req, res) {
 								res.status(500).send(err);
 							}
 							else {
-								userController.attributePointsToUsers(req.body.previousDropperIds, 10, function(pointsResult) {
-									var result = {points: pointsResult, drop: new_drop};
-						 			res.set('Access-Control-Allow-Origin', '*');
-									res.json(result);
+								var successes = [];
+								var errors = [];
+								req.body.previousDropperIds.forEach(function(userId, i) {
+									userController.attributePointsToUser(userId, req.body.previousDropperIds.length - i, function(pointsResult) {
+										if (pointsResult.result === "success") {
+											successes.push(pointsResult);
+										}
+										else {
+											errors.push(pointsResult);
+										}
+										if (successes.length + errors.length === req.body.previousDropperIds.length) {
+											var result = {result:"success", pointSuccess: successes.count, pointErrors: errors.count, drop: new_drop};
+								 			res.set('Access-Control-Allow-Origin', '*');
+											res.json(result);
+										}
+									});
 								});
 							}
 						});

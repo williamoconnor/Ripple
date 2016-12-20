@@ -29,7 +29,7 @@ exports.getLocation = function(req, res, next) {
 		{
 			var location = navigator.geolocation.getCurrentPosition(showPosition);
 
-	    	document.getElementById("location").style.display = 'none';
+	    		document.getElementById("location").style.display = 'none';
 		} 
 		else {
 	  		alert ("Couldn't get location. Sorry bitch");
@@ -41,10 +41,20 @@ exports.getLocation = function(req, res, next) {
 function getSurroundingSquares(latitude, longitude) {
 	var bigLocation = {};
 
-	bigLocation.top = checkLatitude(Math.floor(latitude) + 2); // plus 2, -1 because we are at the lower edge of the square
-	bigLocation.bottom = checkLatitude(Math.floor(latitude) - 1);
-	bigLocation.left = checkLongitude(Math.floor(longitude) - 1);
-	bigLocation.right = checkLongitude(Math.floor(longitude) + 2);
+	// 1 deg lat = 69 miles
+	// 1 mile = 0.01449275362 deg lat
+	var mileLat = 0.01449275362;
+
+	// 1 deg lng = 54.6 miles
+	// 1 mile = 0.01831501832
+	var mileLng = 0.01831501832;
+
+	var radiusMiles = 5;
+
+	bigLocation.top = checkLatitude(latitude + (radiusMiles * mileLat));
+	bigLocation.bottom = checkLatitude(latitude - (radiusMiles * mileLat));
+	bigLocation.left = checkLongitude(longitude - (radiusMiles * mileLng));
+	bigLocation.right = checkLongitude(longitude + (radiusMiles * mileLng));
 
 	return bigLocation;
 }
