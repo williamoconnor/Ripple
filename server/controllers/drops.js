@@ -142,19 +142,21 @@ exports.reDrop = function(req, res) {
 								var successes = [];
 								var errors = [];
 								req.body.previousDropperIds.forEach(function(userId, i) {
-									userController.attributePointsToUser(userId, req.body.previousDropperIds.length - i, function(pointsResult) {
-										if (pointsResult.result === "success") {
-											successes.push(pointsResult);
-										}
-										else {
-											errors.push(pointsResult);
-										}
-										if (successes.length + errors.length === req.body.previousDropperIds.length) {
-											var result = {result:"success", pointSuccess: successes.count, pointErrors: errors.count, drop: new_drop};
-								 			res.set('Access-Control-Allow-Origin', '*');
-											res.json(result);
-										}
-									});
+									if (userId != req.body.userId) {
+										userController.attributePointsToUser(userId, req.body.previousDropperIds.length - i, function(pointsResult) {
+											if (pointsResult.result === "success") {
+												successes.push(pointsResult);
+											}
+											else {
+												errors.push(pointsResult);
+											}
+											if (successes.length + errors.length === req.body.previousDropperIds.length) {
+												var result = {result:"success", pointSuccess: successes.count, pointErrors: errors.count, drop: new_drop};
+									 			res.set('Access-Control-Allow-Origin', '*');
+												res.json(result);
+											}
+										});	
+									}
 								});
 							}
 						});
