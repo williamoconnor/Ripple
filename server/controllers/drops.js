@@ -72,6 +72,7 @@ exports.createDrop = function(req, res) {
 
 			drop.save(function(err) {
 				if (err) {
+					console.log(err);
 					res.status(500).send(err);
 				}
 				else {
@@ -150,9 +151,11 @@ exports.reDrop = function(req, res) {
 											else {
 												errors.push(pointsResult);
 											}
+											console.log("so far: " + successes.length + " + " + errors.length);
 											if (successes.length + errors.length === req.body.previousDropperIds.length) {
 												var result = {result:"success", pointSuccess: successes.count, pointErrors: errors.count, drop: new_drop};
 									 			res.set('Access-Control-Allow-Origin', '*');
+									 			console.log(result);
 												res.json(result);
 											}
 										});	
