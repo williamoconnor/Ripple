@@ -152,7 +152,8 @@ exports.reDrop = function(req, res) {
 												errors.push(pointsResult);
 											}
 											console.log("so far: " + successes.length + " + " + errors.length);
-											if (successes.length + errors.length === req.body.previousDropperIds.length) {
+											console.log("needs to be: " + req.body.previousDropperIds.length);
+											if (successes.length + errors.length === req.body.previousDropperIds.length - 1) { // we removed ourself
 												var result = {result:"success", pointSuccess: successes.count, pointErrors: errors.count, drop: new_drop};
 									 			res.set('Access-Control-Allow-Origin', '*');
 									 			console.log(result);
