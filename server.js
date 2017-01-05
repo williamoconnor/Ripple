@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var favicon = require("serve-favicon");
 var cors = require('cors');
+require('newrelic');
 
 // routes
 var dropRouter = require('./server/routes/dropRoutes');
