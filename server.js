@@ -2,6 +2,7 @@ var modeObj = require('./mode.js');
 var mode = modeObj.mode;
 
 // node modules
+require('newrelic');
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -9,7 +10,7 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var favicon = require("serve-favicon");
 var cors = require('cors');
-require('newrelic');
+
 
 // routes
 var dropRouter = require('./server/routes/dropRoutes');
