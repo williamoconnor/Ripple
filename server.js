@@ -58,8 +58,8 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
 });
 
-app.get('/loaderio-9c4802eb1ac37895284308e7fcd7ded9.txt', function(req, res){
-	res.sendFile(__dirname + '/client/loaderio-9c4802eb1ac37895284308e7fcd7ded9.txt');
+app.get('/loaderio-10b71b9991ed813d4db4dd10e74bbf40.txt', function(req, res){
+	res.sendFile(__dirname + '/client/loaderio-10b71b9991ed813d4db4dd10e74bbf40.txt');
 });
 
 // heroku
