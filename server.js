@@ -2,7 +2,9 @@ var modeObj = require('./mode.js');
 var mode = modeObj.mode;
 
 // node modules
-require('newrelic');
+if (mode === 'test') {
+	require('newrelic');
+}
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -54,6 +56,10 @@ app.use(favicon(__dirname + '/favicon.ico'));
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/client/views/index.html');
+});
+
+app.get('/loaderio-9c4802eb1ac37895284308e7fcd7ded9.txt', function(req, res){
+	res.sendFile(__dirname + '/client/loaderio-9c4802eb1ac37895284308e7fcd7ded9.txt');
 });
 
 // heroku
