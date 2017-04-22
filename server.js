@@ -26,7 +26,8 @@ var location = require('./server/middleware/location');
 if (mode == 'local'){
 	mongoose.connect('mongodb://localhost/rippleTest');
 	//static files
-	app.use(express.static('client'));
+	app.use(express.static(path.join(__dirname, 'client')));
+	// app.use(express.static('client/splash'));
 	app.use(express.static('bower_components'));
 }
 
@@ -34,7 +35,7 @@ if (mode == 'local'){
 else if (mode == 'test'){
 	mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
 	// static files
-	console.log(path.join(process.env.PWD, 'client'))
+	console.log(path.join(process.env.PWD, 'client'));
 	app.use(express.static(path.join(process.env.PWD, 'client')));
 	app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 }
@@ -43,7 +44,7 @@ else if (mode == 'test'){
 else if (mode == 'live'){
 	mongoose.connect('mongodb://heroku_xv125p2h:28idmqdlvkdlm5vanhuv3r6ki2@ds041593.mongolab.com:41593/heroku_xv125p2h');
 	// static files
-	console.log(path.join(process.env.PWD, 'client'))
+	console.log(path.join(process.env.PWD, 'client'));
 	app.use(express.static(path.join(process.env.PWD, 'client')));
 	app.use(express.static(path.join(process.env.PWD, 'bower_components')));
 }
@@ -55,7 +56,8 @@ app.use('/api/users', userRouter);
 app.use(favicon(__dirname + '/favicon.ico'));
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + '/client/views/index.html');
+	// res.sendFile(__dirname + '/client/splash/index.html');
+	return res.redirect('/splash');
 });
 
 app.get('/loaderio-10b71b9991ed813d4db4dd10e74bbf40.txt', function(req, res){
