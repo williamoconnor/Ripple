@@ -32,9 +32,9 @@ API Methods:
 			}
 		changePassword
 			{
+				userId: string,
 				email: string,
 				password: string,
-				newPassword: string
 			}
 		verifyUser
 			{

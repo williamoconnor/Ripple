@@ -34,7 +34,7 @@ exports.register = function(req, res){
 			    api_user: sendGridInfo.options.api_user,
 			    api_key: sendGridInfo.options.api_key
 			  }
-			}
+			};
 
 			var client = nodemailer.createTransport(sgTransport(options));
 			var baseURL = 'http://ripplemusicapp.herokuapp.com/api/users/verify/';
@@ -63,7 +63,7 @@ exports.register = function(req, res){
 			res.status(201).json(user);
 		}
 	});
-}
+};
 
 exports.changePassword = function (req, res) { // actually changes the password of the user
 	console.log(req.body);
