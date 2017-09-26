@@ -82,10 +82,12 @@ var dropSchema = new mongoose.Schema({
 		references: 'Drop'
 	},
 	created_at: {
-		type: Date
+		type: Date,
+		default: Date.now
 	},
 	updated_at: {
-		type: Date
+		type: Date,
+		default: Date.now
 	}
 });
 
