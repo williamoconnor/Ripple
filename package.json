@@ -4,8 +4,10 @@
   "description": "Location based music sharing and streaming",
   "main": "server.js",
   "engines": {
-    "node": "0.10.32",
-    "npm": "1.4.28"
+    // "node": "0.10.32",
+    "node": "7.6.0",
+    // "npm": "1.4.28"
+    "npm": "4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -72,8 +72,8 @@ if (mode == 'test') {
 }
 
 else if (mode == 'local') {
-	app.listen(3000, function (){
-		console.log('App running on port ' + 3000 + ' in ' + mode + ' mode.');
+	app.listen(9229, function (){
+		console.log('App running on port ' + 9229 + ' in ' + mode + ' mode.');
 	});
 }
 
