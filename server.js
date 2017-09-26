@@ -55,10 +55,10 @@ app.use('/api/users', userRouter);
 
 app.use(favicon(__dirname + '/favicon.ico'));
 
-// app.get('/', function(req, res) {
-// 	// res.sendFile(__dirname + '/client/splash/index.html');
-// 	return res.redirect('/splash');
-// });
+app.get('/', function(req, res) {
+	// res.sendFile(__dirname + '/client/splash/index.html');
+	return res.redirect('/splash');
+});
 
 app.get('/loaderio-10b71b9991ed813d4db4dd10e74bbf40.txt', function(req, res){
 	res.sendFile(__dirname + '/client/loaderio-10b71b9991ed813d4db4dd10e74bbf40.txt');
@@ -72,8 +72,8 @@ if (mode == 'test') {
 }
 
 else if (mode == 'local') {
-	app.listen(9229, function (){
-		console.log('App running on port ' + 9229 + ' in ' + mode + ' mode.');
+	app.listen(3000, function (){
+		console.log('App running on port ' + 3000 + ' in ' + mode + ' mode.');
 	});
 }
 
